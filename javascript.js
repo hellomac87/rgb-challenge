@@ -1,13 +1,21 @@
 function game(){
+    this.score = 0; // 기본 score
+    this.scoreElem = document.getElementById("score"); 
     this.circles = document.querySelectorAll(".answers li");
-    
+    this.question = document.getElementById("question");
+
+    this.init = function(){
+        this.inputColor();
+        this.setScore();
+    }
+
     this.inputColor = function(){
         for (let i = 0; i < this.circles.length; i++) {
-            this.circles[i].style.backgroundColor = this.randomColor();
+            this.circles[i].style.backgroundColor = this.createRandomColor();
         }
     }
     
-    this.randomColor = function(){
+    this.createRandomColor = function(){
         const cadidate = '0123456789ABCDEF';
         let colorCode = '#'
 
@@ -17,11 +25,15 @@ function game(){
         }
         return colorCode;
     }
+
+    this.setScore = function(){
+        this.scoreElem.textContent = this.score;
+    }
 }
 
 
 document.addEventListener("DOMContentLoaded", function () {
     const game1 = new game();
-    
-    game1.inputColor();
+
+    game1.init();
 });
