@@ -1,83 +1,83 @@
-function game() {
-    this.score = 0; // 기본 score
-    this.answer = 0;
-    this.scoreElem = document.getElementById("score");
-    this.overlayScoreElem = document.getElementById("overlayScore");
-    this.circles = document.querySelectorAll(".answers li");
-    this.question = document.getElementById("question");
-    this.nextBtn = document.getElementById("nextBtn");
-    this.againBtn = document.getElementById("againBtn");
-    this.wrongDiv = document.querySelector('.wrong');
-    this.correctDiv = document.querySelector(".correct");
-    this.overlayDiv = document.querySelector(".overlay");
+const scoreElem = document.getElementById("score");
+const overlayScoreElem = document.getElementById("overlayScore");
+const circles = document.querySelectorAll(".answers li");
+const question = document.getElementById("question");
+const nextBtn = document.getElementById("nextBtn");
+const againBtn = document.getElementById("againBtn");
+const wrongDiv = document.querySelector('.wrong');
+const correctDiv = document.querySelector(".correct");
+const overlayDiv = document.querySelector(".overlay");
 
-    this.nextBtn.addEventListener('click', (e) => {
-        // next 버튼 클릭시
-        this.newStage();
-        this.correctDiv.style.display = 'none';
-        this.overlayDiv.style.display = "none";
-        this.circles.forEach(circle => {
-            circle.classList.remove('show');
-        });
-    });
-    this.againBtn.addEventListener("click", e => {
-        // play again 버튼 클릭시
-        this.newStage();
-        this.wrongDiv.style.display = "none";
-        this.overlayDiv.style.display = "none";
-        this.circles.forEach(circle => {
-          circle.classList.remove("show");
-        });
-    });
+let score = 0; // 기본 score
+let answer = 0;
 
-    this.circles.forEach((circle, index) => {
-        circle.addEventListener("click", e => {
-            if (this.answer === index) {
-                // ok
-                this.correctDiv.style.display = 'block';
-                this.overlayDiv.style.display = "block";
-                this.handleScore();
-            } else {
-                // no
-                console.log("no");
-                this.wrongDiv.style.display = "block";
-                this.overlayDiv.style.display = "block";
-            }
-            circle.classList.add("show");
-        });
+nextBtn.addEventListener('click', (e) => {
+    // next 버튼 클릭시
+    newStage();
+    correctDiv.style.display = 'none';
+    overlayDiv.style.display = "none";
+    circles.forEach(circle => {
+        circle.classList.remove('show');
     });
+});
+againBtn.addEventListener("click", e => {
+    // play again 버튼 클릭시
+    newStage();
+    wrongDiv.style.display = "none";
+    overlayDiv.style.display = "none";
+    circles.forEach(circle => {
+        circle.classList.remove("show");
+    });
+});
 
-  this.newStage = function() {
+circles.forEach((circle, index) => {
+    circle.addEventListener("click", e => {
+        if (answer === index) {
+            // ok
+            correctDiv.style.display = 'block';
+            overlayDiv.style.display = "block";
+            handleScore();
+        } else {
+            // no
+            console.log("no");
+            wrongDiv.style.display = "block";
+            overlayDiv.style.display = "block";
+        }
+        circle.classList.add("show");
+    });
+});
+
+newStage = function () {
     const options = [
-      this.createRandomColor(),
-      this.createRandomColor(),
-      this.createRandomColor()
+        createRandomColor(),
+        createRandomColor(),
+        createRandomColor()
     ];
 
-    this.answer = Math.floor(Math.random() * 3);
+    answer = Math.floor(Math.random() * 3);
 
-    this.circles.forEach((circle, index) => {
+    circles.forEach((circle, index) => {
         circle.style.backgroundColor = options[index];
         circle.classList.remove('active');
     });
 
-    this.question.textContent = options[this.answer];
-  };
+    question.textContent = options[answer];
+};
 
-  this.createRandomColor = function() {
+createRandomColor = function () {
     return `rgb(${Math.floor(Math.random() * 256)}, ${Math.floor(
-      Math.random() * 256
+        Math.random() * 256
     )}, ${Math.floor(Math.random() * 256)})`;
-  };
+};
 
-  this.handleScore = function(){
-      this.score += 100;
-      this.scoreElem.textContent = this.score;
-      this.overlayScoreElem.textContent = this.score;
-  }
+handleScore = function () {
+    score += 100;
+    scoreElem.textContent = score;
+    overlayScoreElem.textContent = score;
 }
 
-document.addEventListener("DOMContentLoaded", function() {
-  const game1 = new game();
-  game1.newStage();
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    newStage();
 });
