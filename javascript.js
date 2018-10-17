@@ -39,7 +39,6 @@ circles.forEach((circle, index) => {
             handleScore();
         } else {
             // no
-            console.log("no");
             wrongDiv.style.display = "block";
             overlayDiv.style.display = "block";
         }
@@ -78,6 +77,5 @@ handleScore = function () {
 
 
 document.addEventListener("DOMContentLoaded", function () {
-
     newStage();
 });

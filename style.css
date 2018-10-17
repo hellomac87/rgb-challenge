@@ -102,6 +102,7 @@ h3{
     z-index: 9;
 }
 .overlay .button{
+    display: inline-block;
     margin: 30px 10px 0px;
     box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
     border: 2px solid white;
@@ -109,6 +110,7 @@ h3{
     padding: 7px;
     font-size: 13pt;
     background-color: transparent;
+    cursor: pointer;
 }
 .overlay .correct, .overlay .wrong {
     position: relative;
