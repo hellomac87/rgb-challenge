@@ -20,14 +20,18 @@ nextBtn.addEventListener('click', (e) => {
         circle.classList.remove('show');
     });
 });
+
 againBtn.addEventListener("click", e => {
     // play again 버튼 클릭시
+    
     newStage();
     wrongDiv.style.display = "none";
     overlayDiv.style.display = "none";
     circles.forEach(circle => {
         circle.classList.remove("show");
     });
+    score = 0;
+    handleScore();
 });
 
 circles.forEach((circle, index) => {
@@ -35,14 +39,14 @@ circles.forEach((circle, index) => {
         if (answer === index) {
             // ok
             correctDiv.style.display = 'block';
-            overlayDiv.style.display = "block";
-            handleScore();
+            score += 100;   
         } else {
             // no
             wrongDiv.style.display = "block";
-            overlayDiv.style.display = "block";
         }
+        overlayDiv.style.display = "block";
         circle.classList.add("show");
+        handleScore();
     });
 });
 
@@ -70,7 +74,6 @@ createRandomColor = function () {
 };
 
 handleScore = function () {
-    score += 100;
     scoreElem.textContent = score;
     overlayScoreElem.textContent = score;
 }
